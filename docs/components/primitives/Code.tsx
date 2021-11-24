@@ -1,10 +1,35 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import Highlight, { Prism } from 'prism-react-renderer';
-import { jsx } from '@emotion/react';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { jsx, Global, css } from '@emotion/react';
+import { ReactNode, useEffect, useMemo, useState, Fragment } from 'react';
 
 import theme from '../../lib/prism-theme';
+
+const codeStyles = css`
+    /* Size */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height : 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 5px;
+      transition: all .8s;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #aaa;
+    }
+`;
 
 type Range = { start: number; end: number };
 type CollapseRange = Range & { isCollapsed: boolean };
@@ -95,6 +120,8 @@ export function Code({ children, className }: { children: string; className?: st
     <Highlight Prism={Prism} code={children.trim()} language={language as any} theme={theme}>
       {({ className, style, tokens: tokens, getLineProps, getTokenProps }) => {
         return (
+          <Fragment>
+          <Global styles={codeStyles}/>
           <div
             className={className}
             css={{
@@ -154,6 +181,7 @@ export function Code({ children, className }: { children: string; className?: st
               );
             })}
           </div>
+          </Fragment>
         );
       }}
     </Highlight>
