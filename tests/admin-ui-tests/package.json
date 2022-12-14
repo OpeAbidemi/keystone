@@ -14,7 +14,7 @@
     "@keystone-next/auth": "*",
     "@keystone-next/keystone": "*",
     "execa": "^5.1.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "graphql": "^15.7.2",
     "playwright": "^1.16.3",
     "treekill": "^1.0.0"
